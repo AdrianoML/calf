@@ -70,7 +70,7 @@ private:
     typedef multibandlimiter_audio_module AM;
     static const int strips = 4;
     uint32_t asc_led, cnt;
-    int _mode;
+    int mode_set[12];
     bool solo[strips];
     bool no_solo;
     dsp::lookahead_limiter strip[strips];
@@ -112,7 +112,7 @@ private:
     typedef sidechainlimiter_audio_module AM;
     static const int strips = 5;
     uint32_t asc_led, cnt;
-    int _mode;
+    int mode_set[12];
     bool solo[strips];
     bool no_solo;
     dsp::lookahead_limiter strip[strips];
