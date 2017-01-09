@@ -2854,8 +2854,9 @@ elasticeq_audio_module::elasticeq_audio_module()
 {
     is_active = false;
     srate = 0;
-    redraw     = 0;
     bypass_    = 0;
+	indiv_old = -1;
+    show_effect = -1;
 
     keep_gliding = 0;
     last_peak = 0;
@@ -3003,14 +3004,12 @@ uint32_t elasticeq_audio_module::process(uint32_t offset, uint32_t numsamples, u
 
             for (int i = 0; i < AM::PeakBands; i++)
             {
-                int offset = i * params_per_band;
-                int active = *params[AM::param_p1_active + offset];
-                //if (active > 3) dsp.diff_ms(procL, procR);
-                if (active == 1 or active == 2 or active == 4)
+                int poffset = i * params_per_band;
+                int active = *params[AM::param_p1_active + poffset];
+                if (active == 1 or active == 2)
                     procL = pL[i].process(procL);
-                if (active == 1 or active == 3 or active == 5)
+                if (active == 1 or active == 3)
                     procR = pR[i].process(procR);
-                //if (active > 3) dsp.undiff_ms(procL, procR);
             }
             
             outL = (procL - gprocL + inL) * *params[param_level_out];
@@ -3041,9 +3040,7 @@ bool elasticeq_audio_module::get_graph(int index, int subindex, int phase, float
     bool r;
     const expander_audio_module *m = &gate;
 
-    if (m && (index >= param_range && index <= param_gating ) ) {
-        if (redraw)
-            redraw = std::max(0, redraw - 1);
+    if (m && (index == param_gating ) ) {
         r = m->get_graph(subindex, data, points, context, mode);
     } else {
         int max = PeakBands;
@@ -3099,7 +3096,7 @@ bool elasticeq_audio_module::get_graph(int index, int subindex, int phase, float
 bool elasticeq_audio_module::get_dot(int index, int subindex, int phase, float &x, float &y, int &size, cairo_iface *context) const
 {
     const expander_audio_module *m = &gate;
-    if (m && (index >= param_range && index <= param_gating ) )
+    if (m && (index == param_gating ) )
         return m->get_dot(subindex, x, y, size, context);
     return false;
 }
@@ -3107,7 +3104,7 @@ bool elasticeq_audio_module::get_dot(int index, int subindex, int phase, float &
 bool elasticeq_audio_module::get_gridline(int index, int subindex, int phase, float &pos, bool &vertical, std::string &legend, cairo_iface *context) const
 {
     const expander_audio_module *m = &gate;
-    if (m && (index >= param_range && index <= param_gating ) )
+    if (m && (index == param_gating ) )
         return m->get_gridline(subindex, pos, vertical, legend, context);
     else
         return get_freq_gridline(subindex, pos, vertical, legend, context, true, 128 * *params[AM::param_zoom], 0);
@@ -3139,7 +3136,7 @@ bool elasticeq_audio_module::get_layers(int index, int generation, unsigned int 
     bool r;
     const expander_audio_module *m = &gate;
 
-    if (m && (index >= param_range && index <= param_gating ) )
+    if (m && (index == param_gating ) )
         r = m->get_layers(index, generation, layers);
     else {
         redraw_graph = redraw_graph || !generation;
@@ -3147,10 +3144,6 @@ bool elasticeq_audio_module::get_layers(int index, int generation, unsigned int 
         return redraw_graph or !generation;
     }
 
-    if (redraw) {
-        layers |= LG_CACHE_GRAPH;
-        r = true;
-    }
     return r;
 }
 
