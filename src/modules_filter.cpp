@@ -1104,6 +1104,7 @@ namespace calf_plugins {
 template class xover_audio_module<xover2_metadata>;
 template class xover_audio_module<xover3_metadata>;
 template class xover_audio_module<xover4_metadata>;
+template class xover_audio_module<xover8_metadata>;
 }
 
 
