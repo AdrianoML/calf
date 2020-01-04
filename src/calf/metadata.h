@@ -29,7 +29,6 @@
 #define STEREO_VU_METER_PARAMS param_meter_inL, param_meter_inR, param_meter_outL, param_meter_outR, param_clip_inL, param_clip_inR, param_clip_outL, param_clip_outR
 #define STEREO_VU_METER_IN_PARAMS param_meter_inL, param_meter_inR, param_clip_inL, param_clip_inR
 #define PERIODICAL_PARAMS param_timing, param_bpm, param_ms, param_hz, param_bpm_host
->>>>>>> Create Multiband Soft plugin, a 12 band gate with 24 outputs
 
 namespace calf_plugins {
 
@@ -350,7 +349,7 @@ struct multibandgate_metadata: public plugin_metadata<multibandgate_metadata>
 /// Adriano's multiband soft 12 band- metadata
 struct multibandsoft12band_metadata: public plugin_metadata<multibandsoft12band_metadata>
 {
-    enum { in_count = 2, out_count = 24, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 2, out_count = 24, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_level_in,
            STEREO_VU_METER_IN_PARAMS,
            param_freq0, param_freq1, param_freq2, param_freq3, param_freq4, param_freq5, param_freq6, param_freq7, param_freq8, param_freq9, param_freq10,
@@ -399,7 +398,7 @@ struct multibandsoft12band_metadata: public plugin_metadata<multibandsoft12band_
 /// Adriano's multiband soft 6 band - metadata
 struct multibandsoft6band_metadata: public plugin_metadata<multibandsoft6band_metadata>
 {
-    enum { in_count = 2, out_count = 12, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 2, out_count = 12, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_level_in,
            STEREO_VU_METER_IN_PARAMS,
            param_freq0, param_freq1, param_freq2, param_freq3, param_freq4,
@@ -430,7 +429,7 @@ struct multibandsoft6band_metadata: public plugin_metadata<multibandsoft6band_me
 /// Adriano's sidechain multiband soft 6 band - metadata
 struct scmultibandsoft6band_metadata: public plugin_metadata<scmultibandsoft6band_metadata>
 {
-    enum { in_count = 4, out_count = 24, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 4, out_count = 24, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_level_in,
            STEREO_VU_METER_IN_PARAMS,
            param_freq0, param_freq1, param_freq2, param_freq3, param_freq4,
@@ -461,7 +460,7 @@ struct scmultibandsoft6band_metadata: public plugin_metadata<scmultibandsoft6ban
 /// Adriano's Elastic EQ - metadata
 struct elasticeq_metadata: public plugin_metadata<elasticeq_metadata>
 {
-    enum { in_count = 2, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 2, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_bypass, param_level_in, param_level_out,
            STEREO_VU_METER_PARAMS,
            param_range, param_threshold, param_ratio, param_attack, param_release, param_knee, param_detection, param_stereo_link, param_gating,
@@ -482,7 +481,7 @@ struct elasticeq_metadata: public plugin_metadata<elasticeq_metadata>
 /// Adriano's Multistrip Elastic EQ - metadata
 struct mstripelasticeq_metadata: public plugin_metadata<mstripelasticeq_metadata>
 {
-    enum { in_count = 14, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 14, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_bypass,
            param_range0, param_threshold0, param_ratio0, param_attack0, param_release0, param_knee0, param_detection0, param_stereo_link0, param_gating0,
            param_range1, param_threshold1, param_ratio1, param_attack1, param_release1, param_knee1, param_detection1, param_stereo_link1, param_gating1,
@@ -544,7 +543,7 @@ struct mstripelasticeq_metadata: public plugin_metadata<mstripelasticeq_metadata
 /// Adriano's Sidechain Multistrip Elastic EQ - metadata
 struct scmstripelasticeq_metadata: public plugin_metadata<scmstripelasticeq_metadata>
 {
-    enum { in_count = 28, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 28, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_bypass,
            param_range0, param_threshold0, param_ratio0, param_attack0, param_release0, param_knee0, param_detection0, param_stereo_link0, param_gating0,
            param_range1, param_threshold1, param_ratio1, param_attack1, param_release1, param_knee1, param_detection1, param_stereo_link1, param_gating1,
@@ -735,7 +734,7 @@ struct equalizer12band_metadata: public plugin_metadata<equalizer12band_metadata
 /// Markus's 20-band EQ - metadata
 struct equalizer20band_metadata: public plugin_metadata<equalizer20band_metadata>
 {
-    enum { in_count = 2, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 2, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_bypass, param_level_in, param_level_out,
            STEREO_VU_METER_PARAMS,
            param_hp_active, param_hp_freq, param_hp_mode, param_hp_q,
@@ -850,7 +849,7 @@ struct equalizer30band_metadata: public plugin_metadata<equalizer30band_metadata
 /// Markus's 58-band EQ - metadata
 struct equalizer58band_metadata: public plugin_metadata<equalizer58band_metadata>
 {
-    enum { in_count = 2, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 2, out_count = 2, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_bypass, param_level_in, param_level_out,
            STEREO_VU_METER_PARAMS,
            param_p1_active, param_p1_level, param_p1_freq, param_p1_q,
@@ -959,7 +958,7 @@ struct xover4_metadata: public plugin_metadata<xover4_metadata>
 };
 struct xover8_metadata: public plugin_metadata<xover8_metadata>
 {
-    enum { in_count = 2, out_count = 16, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true };
+    enum { in_count = 2, out_count = 16, ins_optional = 0, outs_optional = 0, support_midi = false, require_midi = false, rt_capable = true, require_instance_access = false };
     enum { param_level, param_meter_0, param_meter_1, param_mode,
            param_freq0, param_freq1, param_freq2, param_freq3, param_freq4, param_freq5, param_freq6,
            param_level1, param_active1, param_phase1, param_delay1, param_meter_01, param_meter_11,

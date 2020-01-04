@@ -3173,7 +3173,7 @@ bool multibandsoft_audio_module<MBSBaseClass, strips>::get_graph(int index, int 
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2) {
-        r = multi_am.exp_am->get_graph(subindex, data, points, context, mode);
+        r = multi_am.exp_am->_get_graph(subindex, data, points, context, mode);
     } else if (multi_am.mode == 0 || multi_am.mode == 1) {
         r = multi_am.cmp_am->get_graph(subindex, data, points, context, mode);
     } else {
@@ -3205,7 +3205,7 @@ bool multibandsoft_audio_module<MBSBaseClass, strips>::get_dot(int index, int su
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2)
-        return multi_am.exp_am->get_dot(subindex, x, y, size, context);
+        return multi_am.exp_am->_get_dot(subindex, x, y, size, context);
     else if (multi_am.mode == 0 || multi_am.mode == 1)
         return multi_am.cmp_am->get_dot(subindex, x, y, size, context);
 
@@ -3219,7 +3219,7 @@ bool multibandsoft_audio_module<MBSBaseClass, strips>::get_gridline(int index, i
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2)
-        return multi_am.exp_am->get_gridline(subindex, pos, vertical, legend, context);
+        return multi_am.exp_am->_get_gridline(subindex, pos, vertical, legend, context);
     else if (multi_am.mode == 0 || multi_am.mode == 1)
         return multi_am.cmp_am->get_gridline(subindex, pos, vertical, legend, context);
 
@@ -3238,7 +3238,7 @@ bool multibandsoft_audio_module<MBSBaseClass, strips>::get_layers(int index, int
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2)
-        r = multi_am.exp_am->get_layers(index, generation, layers);
+        r = multi_am.exp_am->_get_layers(index, generation, layers);
     else if (multi_am.mode == 0 || multi_am.mode == 1)
         r = multi_am.cmp_am->get_layers(index, generation, layers);
     else
@@ -3651,7 +3651,7 @@ bool scmultibandsoft_audio_module<MBSBaseClass, strips>::get_graph(int index, in
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2) {
-        r = multi_am.exp_am->get_graph(subindex, data, points, context, mode);
+        r = multi_am.exp_am->_get_graph(subindex, data, points, context, mode);
     } else if (multi_am.mode == 0 || multi_am.mode == 1) {
         r = multi_am.cmp_am->get_graph(subindex, data, points, context, mode);
     } else {
@@ -3683,7 +3683,7 @@ bool scmultibandsoft_audio_module<MBSBaseClass, strips>::get_dot(int index, int 
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2)
-        return multi_am.exp_am->get_dot(subindex, x, y, size, context);
+        return multi_am.exp_am->_get_dot(subindex, x, y, size, context);
     else if (multi_am.mode == 0 || multi_am.mode == 1)
         return multi_am.cmp_am->get_dot(subindex, x, y, size, context);
 
@@ -3697,7 +3697,7 @@ bool scmultibandsoft_audio_module<MBSBaseClass, strips>::get_gridline(int index,
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2)
-        return multi_am.exp_am->get_gridline(subindex, pos, vertical, legend, context);
+        return multi_am.exp_am->_get_gridline(subindex, pos, vertical, legend, context);
     else if (multi_am.mode == 0 || multi_am.mode == 1)
         return multi_am.cmp_am->get_gridline(subindex, pos, vertical, legend, context);
 
@@ -3716,7 +3716,7 @@ bool scmultibandsoft_audio_module<MBSBaseClass, strips>::get_layers(int index, i
         
     get_strip_by_param_index(index, &multi_am);
     if (multi_am.mode == 2)
-        r = multi_am.exp_am->get_layers(index, generation, layers);
+        r = multi_am.exp_am->_get_layers(index, generation, layers);
     else if (multi_am.mode == 0 || multi_am.mode == 1)
         r = multi_am.cmp_am->get_layers(index, generation, layers);
     else
@@ -3946,7 +3946,7 @@ bool elasticeq_audio_module::get_graph(int index, int subindex, int phase, float
     const expander_audio_module *m = &gate;
 
     if (m && (index == param_gating ) ) {
-        r = m->get_graph(subindex, data, points, context, mode);
+        r = m->_get_graph(subindex, data, points, context, mode);
     } else {
         int max = PeakBands;
         
@@ -4003,7 +4003,7 @@ bool elasticeq_audio_module::get_dot(int index, int subindex, int phase, float &
 {
     const expander_audio_module *m = &gate;
     if (m && (index == param_gating ) )
-        return m->get_dot(subindex, x, y, size, context);
+        return m->_get_dot(subindex, x, y, size, context);
     return false;
 }
 
@@ -4011,7 +4011,7 @@ bool elasticeq_audio_module::get_gridline(int index, int subindex, int phase, fl
 {
     const expander_audio_module *m = &gate;
     if (m && (index == param_gating ) )
-        return m->get_gridline(subindex, pos, vertical, legend, context);
+        return m->_get_gridline(subindex, pos, vertical, legend, context);
     else
         return get_freq_gridline(subindex, pos, vertical, legend, context, true, 128 * *params[AM::param_zoom], 0);
 
@@ -4043,7 +4043,7 @@ bool elasticeq_audio_module::get_layers(int index, int generation, unsigned int 
     const expander_audio_module *m = &gate;
 
     if (m && (index == param_gating ) )
-        r = m->get_layers(index, generation, layers);
+        r = m->_get_layers(index, generation, layers);
     else {
         redraw_graph = redraw_graph || !generation;
         layers |= (generation ? LG_NONE : LG_CACHE_GRID) | (redraw_graph ? LG_CACHE_GRAPH : LG_NONE);
@@ -4295,7 +4295,7 @@ bool mstripelasticeq_audio_module::get_graph(int index, int subindex, int phase,
     const expander_audio_module *m = get_strip_by_param_index(index);
 
     if (m) {
-        r = m->get_graph(subindex, data, points, context, mode);
+        r = m->_get_graph(subindex, data, points, context, mode);
     } else {
         int max = PeakBands;
         
@@ -4352,7 +4352,7 @@ bool mstripelasticeq_audio_module::get_dot(int index, int subindex, int phase, f
 {
     const expander_audio_module *m = get_strip_by_param_index(index);
     if (m)
-        return m->get_dot(subindex, x, y, size, context);
+        return m->_get_dot(subindex, x, y, size, context);
 
     return false;
 }
@@ -4361,7 +4361,7 @@ bool mstripelasticeq_audio_module::get_gridline(int index, int subindex, int pha
 {
     const expander_audio_module *m = get_strip_by_param_index(index);
     if (m)
-        return m->get_gridline(subindex, pos, vertical, legend, context);
+        return m->_get_gridline(subindex, pos, vertical, legend, context);
     else
         return get_freq_gridline(subindex, pos, vertical, legend, context, true, 128 * *params[AM::param_zoom], 0);
 
@@ -4410,7 +4410,7 @@ bool mstripelasticeq_audio_module::get_layers(int index, int generation, unsigne
     const expander_audio_module *m = get_strip_by_param_index(index);
 
     if (m) {
-        r = m->get_layers(index, generation, layers);
+        r = m->_get_layers(index, generation, layers);
     } else {
         redraw_graph = redraw_graph || !generation;
         layers |= (generation ? LG_NONE : LG_CACHE_GRID) | (redraw_graph ? LG_CACHE_GRAPH : LG_NONE);
@@ -4663,7 +4663,7 @@ bool scmstripelasticeq_audio_module::get_graph(int index, int subindex, int phas
     const expander_audio_module *m = get_strip_by_param_index(index);
 
     if (m) {
-        r = m->get_graph(subindex, data, points, context, mode);
+        r = m->_get_graph(subindex, data, points, context, mode);
     } else {
         int max = PeakBands;
         
@@ -4720,7 +4720,7 @@ bool scmstripelasticeq_audio_module::get_dot(int index, int subindex, int phase,
 {
     const expander_audio_module *m = get_strip_by_param_index(index);
     if (m)
-        return m->get_dot(subindex, x, y, size, context);
+        return m->_get_dot(subindex, x, y, size, context);
 
     return false;
 }
@@ -4729,7 +4729,7 @@ bool scmstripelasticeq_audio_module::get_gridline(int index, int subindex, int p
 {
     const expander_audio_module *m = get_strip_by_param_index(index);
     if (m)
-        return m->get_gridline(subindex, pos, vertical, legend, context);
+        return m->_get_gridline(subindex, pos, vertical, legend, context);
     else
         return get_freq_gridline(subindex, pos, vertical, legend, context, true, 128 * *params[AM::param_zoom], 0);
 
@@ -4778,7 +4778,7 @@ bool scmstripelasticeq_audio_module::get_layers(int index, int generation, unsig
     const expander_audio_module *m = get_strip_by_param_index(index);
 
     if (m) {
-        r = m->get_layers(index, generation, layers);
+        r = m->_get_layers(index, generation, layers);
     } else {
         redraw_graph = redraw_graph || !generation;
         layers |= (generation ? LG_NONE : LG_CACHE_GRID) | (redraw_graph ? LG_CACHE_GRAPH : LG_NONE);
